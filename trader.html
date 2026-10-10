@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mayank Singh Trader | Indian Market Insights & Education</title>
+    <meta name="description" content="Understand the Market. Learn the Strategy. Build the Discipline. Explore Indian stock market information, market trends, technical analysis concepts, and trading education.">
+    
+    <!-- Prevent Theme Flashing -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('mst-theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* =================================
+           CSS VARIABLES & THEME SYSTEM
+           ================================= */
+        :root {
+            /* Light Mode (Default) */
+            --bg-main: #FFFFFF;
+            --bg-secondary: #F8FAFC;
+            --bg-card: #FFFFFF;
+            --indigo-primary: #4338CA;
+            --indigo-deep: #312E81;
+            --indigo-soft: #EEF2FF;
+            --text-main: #111827;
+            --text-secondary: #64748B;
+            --border-card: #E5E7EB;
+            --shadow-sm: 0 4px 20px -2px rgba(67, 56, 202, 0.06);
+            --shadow-md: 0 10px 30px -5px rgba(17, 24, 39, 0.08);
+            --shadow-lg: 0 20px 50px -10px rgba(17, 24, 39, 0.12);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html.dark-mode {
+            /* Dark Mode */
+            --bg-main: #080B14;
+            --bg-secondary: #0F172A;
+            --bg-card: #111827;
+            --indigo-primary: #818CF8;
+            --indigo-deep: #6366F1;
+            --indigo-soft: #1E293B;
+            --text-main: #F8FAFC;
+            --text-secondary: #A1A1AA;
+            --border-card: #273449;
+            --shadow-sm: 0 4px 20px -2px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 10px 30px -5px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 20px 50px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Reset & Base */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            overflow-x: hidden;
+        }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+        /* Typography */
+        h1, h2, h3, h4 { font-family: 'Manrope', system-ui, sans-serif; font-weight: 800; line-height: 1.2; color: var(--text-main); }
+        .text-indigo { color: var(--indigo-primary); }
+
+        /* Container */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+        /* Navbar */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-card);
+            transition: background 0.4s ease, border-color 0.4s ease;
+        }
+        html.dark-mode .navbar { background: rgba(8, 11, 20, 0.8); }
+        .nav-container { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+        .nav-logo { display: flex; align-items: center; gap: 0.75rem; }
+        .logo-monogram {
+            width: 36px; height: 36px; background: var(--indigo-primary); color: white;
+            border-radius: 8px; display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 1.1rem; box-shadow: 0 4px 12px rgba(67, 56, 202, 0.3);
+        }
+        html.dark-mode .logo-monogram { box-shadow: 0 4px 12px rgba(129, 140, 248, 0.3); }
+        .logo-text { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 1.1rem; }
+        .nav-links { display: flex; gap: 0.5rem; }
+        .nav-link {
+            padding: 0.5rem 0.875rem; font-size: 0.9rem; font-weight: 500;
+            color: var(--text-secondary); border-radius: 8px; transition: var(--transition);
+        }
+        .nav-link:hover, .nav-link.active { color: var(--indigo-primary); background: var(--indigo-soft); }
+        .nav-actions { display: flex; align-items: center; gap: 0.75rem; }
+        .icon-btn {
+            width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center;
+            justify-content: center; color: var(--text-secondary); transition: var(--transition);
+            border: 1px solid var(--border-card);
+        }
+        .icon-btn:hover { background: var(--indigo-soft); color: var(--indigo-primary); border-color: var(--indigo-primary); }
+        
+        /* Hamburger */
+        .hamburger { display: none; flex-direction: column; gap: 4px; padding: 8px; }
+        .hamburger span { width: 24px; height: 2px; background: var(--text-main); transition: var(--transition); }
+
+        /* Hero */
+        .hero { padding: 9rem 0 5rem; background: var(--bg-secondary); border-bottom: 1px solid var(--border-card); }
+        .hero-container { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .badge {
+            display: inline-flex; align-items: center; gap: 0.5rem; background: var(--bg-card);
+            border: 1px solid var(--border-card); color: var(--indigo-primary); font-size: 0.75rem;
+            font-weight: 600; padding: 0.4rem 0.8rem; border-radius: 99px; box-shadow: var(--shadow-sm);
+            text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        .hero-title { font-size: 3.5rem; margin: 1.5rem 0 1rem; animation: fadeUp 0.8s ease-out; }
+        .hero-subtitle { font-size: 1.5rem; color: var(--text-secondary); margin-bottom: 1.5rem; font-weight: 500; }
+        .hero-desc { color: var(--text-secondary); font-size: 1.125rem; margin-bottom: 2rem; max-width: 500px; animation: fadeUp 1s ease-out; }
+        .hero-actions { display: flex; gap: 1rem; margin-bottom: 3rem; animation: fadeUp 1.2s ease-out; flex-wrap: wrap; }
+        .hero-visual { animation: fadeIn 1.2s ease-out; }
+
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+            padding: 0.75rem 1.5rem; border-radius: 10px; font-weight: 600; font-size: 0.95rem;
+            transition: var(--transition); cursor: pointer;
+        }
+        .btn-primary { background: var(--indigo-primary); color: #fff; box-shadow: 0 4px 14px rgba(67, 56, 202, 0.25); }
+        .btn-primary:hover { background: var(--indigo-deep); transform: translateY(-2px); }
+        .btn-outline { border: 1px solid var(--border-card); background: var(--bg-card); color: var(--text-main); }
+        .btn-outline:hover { border-color: var(--indigo-primary); color: var(--indigo-primary); }
+
+        /* Chart Card */
+        .chart-card { background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 16px; padding: 1.5rem; box-shadow: var(--shadow-lg); }
+        .chart-header { display: flex; justify-content: space-between; margin-bottom: 1rem; align-items: flex-start; }
+        .chart-title { display: block; font-size: 0.875rem; color: var(--text-secondary); font-weight: 600; }
+        .chart-value { font-size: 1.5rem; font-weight: 700; font-family: 'Manrope', sans-serif; }
+        .chart-svg-container { height: 200px; width: 100%; }
+        .chart-svg { width: 100%; height: 100%; overflow: visible; }
+
+        /* Sections */
+        .section { padding: 5rem 0; }
+        .section-muted { background: var(--bg-secondary); }
+        .section-header { text-align: center; margin-bottom: 3rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+        .section-title { font-size: 2.25rem; margin-bottom: 0.5rem; }
+        .section-subtitle { color: var(--text-secondary); font-size: 1.1rem; }
+
+        /* Grids */
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; }
+
+        /* Cards */
+        .info-card { background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 12px; padding: 1.5rem; transition: var(--transition); }
+        .info-card:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); border-color: var(--indigo-primary); }
+        .card-title { font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .card-text { color: var(--text-secondary); font-size: 0.9rem; }
+
+        /* Education Levels */
+        .edu-card { background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 16px; padding: 2rem; }
+        .edu-badge { width: fit-content; padding: 0.25rem 0.75rem; border-radius: 99px; font-size: 0.75rem; font-weight: 600; margin-bottom: 1rem; background: var(--indigo-soft); color: var(--indigo-primary); }
+        .edu-list { margin-top: 1rem; }
+        .edu-list li { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; color: var(--text-secondary); font-size: 0.9rem; }
+        .edu-list li::before { content: "•"; color: var(--indigo-primary); font-weight: bold; }
+
+        /* Risk Section Special Card */
+        .risk-card { background: var(--indigo-soft); border: 1px solid var(--indigo-primary); border-radius: 16px; padding: 2rem; text-align: center; }
+        .risk-card h3 { color: var(--indigo-primary); }
+
+        /* About */
+        .about-container { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; align-items: center; }
+        .profile-placeholder { width: 200px; height: 200px; border-radius: 50%; background: var(--indigo-soft); display: flex; align-items: center; justify-content: center; color: var(--indigo-primary); font-size: 4rem; font-weight: 800; border: 4px solid var(--bg-card); box-shadow: var(--shadow-md); margin: 0 auto; }
+        .about-title { color: var(--indigo-primary); font-weight: 600; margin: 0.5rem 0 1.5rem; font-size: 1.2rem; }
+        .about-desc { color: var(--text-secondary); margin-bottom: 1rem; }
+
+        /* Footer */
+        .footer { background: var(--bg-secondary); border-top: 1px solid var(--border-card); padding: 4rem 0 2rem; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+        .footer-desc { color: var(--text-secondary); margin-top: 1rem; max-width: 400px; font-size: 0.9rem; }
+        .footer-col h4 { font-size: 1rem; margin-bottom: 1rem; }
+        .footer-col ul { display: flex; flex-direction: column; gap: 0.75rem; }
+        .footer-col a { color: var(--text-secondary); font-size: 0.9rem; transition: var(--transition); }
+        .footer-col a:hover { color: var(--indigo-primary); }
+        .footer-disclaimer { background: var(--bg-main); border: 1px solid var(--border-card); padding: 1.5rem; border-radius: 12px; font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 2rem; text-align: center; }
+        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid var(--border-card); font-size: 0.875rem; color: var(--text-secondary); }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-container, .about-container { grid-template-columns: 1fr; gap: 2rem; }
+            .hero-visual { max-width: 500px; margin: 0 auto; }
+            .about-content { text-align: center; }
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed; top: 72px; right: -100%; width: 100%; height: calc(100vh - 72px);
+                background: var(--bg-card); flex-direction: column; padding: 2rem;
+                gap: 0; transition: right 0.3s ease-in-out; align-items: flex-start;
+            }
+            .nav-links.nav-active { right: 0; box-shadow: var(--shadow-lg); }
+            .nav-link { padding: 1rem 0; border-bottom: 1px solid var(--border-card); width: 100%; }
+            .hamburger { display: flex; }
+            .hero { padding: 7rem 0 3rem; }
+            .hero-title { font-size: 2.5rem; }
+            .hero-subtitle { font-size: 1.2rem; }
+            .section { padding: 3rem 0; }
+            .section-title { font-size: 1.75rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="#home" class="nav-logo">
+                <div class="logo-monogram">MS</div>
+                <span class="logo-text">Mayank Singh Trader</span>
+            </a>
+            
+            <nav class="nav-links" id="navLinks">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#markets" class="nav-link">Market Overview</a>
+                <a href="#insights" class="nav-link">Market Insights</a>
+                <a href="#strategies" class="nav-link">Trading Strategies</a>
+                <a href="#education" class="nav-link">Trading Education</a>
+                <a href="#about" class="nav-link">About Mayank</a>
+            </nav>
+
+            <div class="nav-actions">
+                <button class="icon-btn" id="themeToggle" aria-label="Toggle Theme">
+                    <svg id="sunIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+                    <svg id="moonIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
+                <button class="hamburger" id="hamburger" aria-label="Menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <span class="badge">INDIAN STOCK MARKET | MARKET INSIGHTS | TRADING EDUCATION</span>
+                    <h1 class="hero-title">Mayank Singh Trader</h1>
+                    <h2 class="hero-subtitle text-indigo">Understand the Market. Learn the Strategy. Build the Discipline.</h2>
+                    <p class="hero-desc">Explore Indian stock market information, market trends, technical analysis concepts, trading strategies, and financial education in one place.</p>
+                    
+                    <div class="hero-actions">
+                        <a href="#markets" class="btn btn-primary">Explore Market Information</a>
+                        <a href="#education" class="btn btn-outline">Learn Trading</a>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <div>
+                                <span class="chart-title">NIFTY 50 - Educational View</span>
+                                <span class="chart-value">Concept Illustration</span>
+                            </div>
+                        </div>
+                        <div class="chart-svg-container">
+                            <svg viewBox="0 0 500 200" preserveAspectRatio="none" class="chart-svg">
+                                <defs>
+                                    <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
+                                        <stop offset="0%" style="stop-color:var(--indigo-primary);stop-opacity:0.3" />
+                                        <stop offset="100%" style="stop-color:var(--indigo-primary);stop-opacity:0" />
+                                    </linearGradient>
+                                </defs>
+                                <path d="M0,150 C50,140 100,120 150,100 S250,70 300,80 S400,50 500,60 V200 H0 Z" fill="url(#grad1)" />
+                                <path d="M0,150 C50,140 100,120 150,100 S250,70 300,80 S400,50 500,60" fill="none" stroke="var(--indigo-primary)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Market Overview -->
+        <section id="markets" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Indian Stock Market Overview</h2>
+                    <p class="section-subtitle">Understand the key benchmark indices that track the performance of the Indian stock market.</p>
+                </div>
+                <div class="grid-2">
+                    <div class="info-card">
+                        <h3 class="card-title">NIFTY 50</h3>
+                        <p class="card-text">The NIFTY 50 index represents the weighted average of the 50 largest and most liquid Indian companies listed on the National Stock Exchange (NSE). Traders follow it to gauge the overall health of the Indian equity market. Its movement indicates the sentiment of large-cap equities.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3 class="card-title">SENSEX</h3>
+                        <p class="card-text">Compiled by the Bombay Stock Exchange (BSE), the SENSEX (Sensitivity Index) tracks 30 well-established and financially sound companies. It is one of the oldest indices in India and serves as a key indicator of domestic economic trends.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3 class="card-title">BANK NIFTY</h3>
+                        <p class="card-text">This sectoral index comprises the most liquid and large capitalized banking stocks on the NSE. Traders monitor BANK NIFTY to understand the specific momentum of the financial and banking sector, which heavily influences the broader market.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3 class="card-title">NIFTY IT</h3>
+                        <p class="card-text">Tracking the performance of the Indian Information Technology sector, this index includes major IT service providers. Its movement often reflects global demand for tech services and currency exchange rate impacts.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Market Insights -->
+        <section id="insights" class="section section-muted">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Understanding Market Movements</h2>
+                    <p class="section-subtitle">Explore the fundamental factors and macroeconomic variables that influence stock market directions.</p>
+                </div>
+                <div class="grid-3">
+                    <div class="info-card">
+                        <h3 class="card-title">Global Market Impact</h3>
+                        <p class="card-text">Global indices (like the US Dow Jones or Nasdaq) and international geopolitical events often create a ripple effect, influencing the opening sentiment and intraday momentum of the Indian market.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3 class="card-title">RBI Policy & Interest Rates</h3>
+                        <p class="card-text">The Reserve Bank of India's monetary policy, including repo rate changes, directly affects liquidity and borrowing costs. Lower rates generally boost equity markets, while higher rates can dampen momentum.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3 class="card-title">Inflation & Economic Data</h3>
+                        <p class="card-text">Macro indicators like CPI inflation, IIP data, and GDP growth numbers provide insights into the economic health. High inflation can reduce corporate margins and consumer spending power.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3 class="card-title">Corporate Earnings</h3>
+                        <p class="card-text">Quarterly earnings reports dictate individual stock and sector performance. Strong revenue and profit guidance drive stock prices upward, while weak earnings lead to corrections.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3 class="card-title">Sector Rotation</h3>
+                        <p class="card-text">Institutional investors often rotate capital from one sector to another based on economic cycles. Understanding which sectors are gaining momentum is key to reading market breadth.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3 class="card-title">Market Volatility</h3>
+                        <p class="card-text">The India VIX measures market expectation of near-term volatility. A rising VIX often indicates fear and uncertainty, while a falling VIX suggests stability and confidence among traders.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trading Strategies -->
+        <section id="strategies" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Trading Strategies and Concepts</h2>
+                    <p class="section-subtitle">Familiarize yourself with widely studied trading concepts. Note: All strategies carry risk and require rigorous testing.</p>
+                </div>
+                <div class="grid-3">
+                    <div class="info-card">
+                        <h3 class="card-title">Price Action Trading</h3>
+                        <p class="card-text">The study of raw price movement without relying on lagging indicators. Traders observe candlestick formations, support/resistance, and trendlines to make decisions. Limitation: Highly subjective and requires experience.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3 class="card-title">Support & Resistance</h3>
+                        <p class="card-text">Identifying price levels where an asset has historically reversed. Support acts as a floor, resistance as a ceiling. Limitation: Levels can be broken easily during high volatility or news events.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3 class="card-title">Trend Analysis</h3>
+                        <p class="card-text">"The trend is your friend." Traders identify market direction using higher highs/lows. Limitation: Determining the exact start or end of a trend is retrospective and prone to false signals.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3 class="card-title">Breakout Trading</h3>
+                        <p class="card-text">Entering a trade when the price breaks through a established support or resistance level, expecting momentum to continue. Limitation: "Fakeouts" where price immediately reverses are common.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3 class="card-title">Moving Averages</h3>
+                        <p class="card-text">Using lines like the 50-day or 200-day SMA/EMA to smooth out price data and identify trend direction and crossovers. Limitation: Lagging indicator that works poorly in sideways markets.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3 class="card-title">RSI and MACD</h3>
+                        <p class="card-text">Momentum oscillators. RSI measures speed and change of price (overbought/oversold). MACD shows relationship between two moving averages. Limitation: Can stay overbought/oversold for long periods.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3 class="card-title">Intraday Trading</h3>
+                        <p class="card-text">Opening and closing positions within the same trading day to avoid overnight risk. Requires strict discipline and real-time monitoring. Limitation: High stress and time-intensive.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3 class="card-title">Swing Trading</h3>
+                        <p class="card-text">Holding positions for days or weeks to capture short-to-medium term gains. Relies heavily on technical patterns. Limitation: Exposes the trader to overnight gap risk.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3 class="card-title">Stop-Loss Management</h3>
+                        <p class="card-text">A predefined exit price to limit losses if the market moves against the trade. Essential for capital preservation. Limitation: Regular "stop hunting" by institutional algorithms.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trading Education -->
+        <section id="education" class="section section-muted">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Learn Trading Step by Step</h2>
+                    <p class="section-subtitle">A structured educational path from absolute basics to advanced market concepts.</p>
+                </div>
+                <div class="grid-3">
+                    <div class="edu-card">
+                        <span class="edu-badge">BEGINNER</span>
+                        <h3 class="card-title">Foundation Building</h3>
+                        <ul class="edu-list">
+                            <li>Stock market fundamentals & mechanics</li>
+                            <li>NSE and BSE exchange basics</li>
+                            <li>Demat and trading account setup</li>
+                            <li>Market orders vs. limit orders</li>
+                            <li>Introduction to candlesticks</li>
+                        </ul>
+                    </div>
+                    <div class="edu-card">
+                        <span class="edu-badge">INTERMEDIATE</span>
+                        <h3 class="card-title">Technical Mastery</h3>
+                        <ul class="edu-list">
+                            <li>Price action & market context</li>
+                            <li>Essential chart patterns</li>
+                            <li>Technical indicators (RSI, MACD)</li>
+                            <li>Volume spread analysis</li>
+                            <li>Risk-to-reward concepts</li>
+                        </ul>
+                    </div>
+                    <div class="edu-card">
+                        <span class="edu-badge">ADVANCED</span>
+                        <h3 class="card-title">Market Structure</h3>
+                        <ul class="edu-list">
+                            <li>Multi-timeframe analysis</li>
+                            <li>Understanding market structure shifts</li>
+                            <li>Trading psychology & bias control</li>
+                            <li>Strategy evaluation & backtesting</li>
+                            <li>Strict capital protection rules</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Risk Management -->
+        <section id="risk" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Discipline Before Profit</h2>
+                    <p class="section-subtitle">Why capital protection is the most important aspect of trading.</p>
+                </div>
+                <div class="grid-3">
+                    <div class="risk-card">
+                        <h3>Why Risk Management Matters</h3>
+                        <p class="card-text" style="margin-top: 10px;">The primary goal of trading is not making money, but protecting what you have. Without strict risk management, a few bad trades can wipe out months of gains.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3 class="card-title">Position Sizing & R:R</h3>
+                        <p class="card-text">Never risk your entire capital on a single trade. Use a fixed percentage risk (e.g., 1% of capital) per trade. Ensure your Risk-to-Reward ratio is at least 1:2 to remain profitable even with a lower win rate.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3 class="card-title">Emotional Discipline</h3>
+                        <p class="card-text">Overtrading and revenge trading are the biggest killers of accounts. A trading journal helps you track not just your trades, but your psychological state, helping you stay objective and rule-based.</p>
+                    </div>
+                    <div class="info-card" style="grid-column: span 3;">
+                        <h3 class="card-title" style="color: var(--negative);">Beware of Guaranteed Profit Claims</h3>
+                        <p class="card-text">No strategy can guarantee profits. Markets are inherently uncertain. Any service or individual promising "sure-shot" returns or guaranteed profits is misleading. Always approach the market with humility and a focus on downside protection.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Mayank Singh -->
+        <section id="about" class="section section-muted">
+            <div class="container about-container">
+                <div class="about-visual">
+                    <div class="profile-placeholder">MS</div>
+                </div>
+                <div class="about-content">
+                    <span class="badge">ABOUT</span>
+                    <h2 class="section-title" style="text-align: left;">About Mayank Singh Trader</h2>
+                    <p class="about-title">Trader and Market Enthusiast</p>
+                    <p class="about-desc">Mayank Singh Trader is an information-based platform dedicated to Indian market insights, trading concepts, financial awareness, and disciplined learning. Its purpose is to make market information easier to understand for beginners and market enthusiasts.</p>
+                    <p class="about-desc"><strong>Philosophy:</strong> Education first, risk management second, and profits third. The market is a place of constant learning, not a casino.</p>
+                    <p class="about-desc"><strong>Areas of Interest:</strong> Index dynamics, price action, trading psychology, and macroeconomics.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="nav-logo">
+                        <div class="logo-monogram">MS</div>
+                        <span class="logo-text">Mayank Singh Trader</span>
+                    </div>
+                    <p class="footer-desc">An information-based platform dedicated to Indian market insights, trading concepts, financial awareness, and disciplined learning.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#markets">Market Overview</a></li>
+                        <li><a href="#insights">Market Insights</a></li>
+                        <li><a href="#strategies">Trading Strategies</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#education">Trading Education</a></li>
+                        <li><a href="#risk">Risk Management</a></li>
+                        <li><a href="#about">About Mayank</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-disclaimer">
+                <strong>Risk Warning:</strong> Information on this website is provided for educational and informational purposes only. It is not personalized financial advice or a recommendation to buy or sell securities. Investments are subject to market risks. Always conduct independent research and understand the risks before making financial decisions.
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> Mayank Singh Trader. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // =================================
+        // MAYANK SINGH TRADER - SCRIPT
+        // =================================
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set dynamic year in footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            // Theme Toggle Setup
+            initThemeToggle();
+            
+            // Mobile Menu
+            initMobileMenu();
+            
+            // Active Nav Link on Scroll
+            initScrollSpy();
+        });
+
+        // --- Theme Toggle ---
+        function initThemeToggle() {
+            const themeToggle = document.getElementById('themeToggle');
+            const sunIcon = document.getElementById('sunIcon');
+            const moonIcon = document.getElementById('moonIcon');
+
+            // Initial check based on class set by the inline script
+            updateThemeIcons();
+
+            themeToggle.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark-mode');
+                if (document.documentElement.classList.contains('dark-mode')) {
+                    localStorage.setItem('mst-theme', 'dark');
+                } else {
+                    localStorage.setItem('mst-theme', 'light');
+                }
+                updateThemeIcons();
+            });
+
+            function updateThemeIcons() {
+                const isDark = document.documentElement.classList.contains('dark-mode');
+                sunIcon.style.display = isDark ? 'block' : 'none';
+                moonIcon.style.display = isDark ? 'none' : 'block';
+            }
+        }
+
+        // --- Mobile Menu ---
+        function initMobileMenu() {
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.getElementById('navLinks');
+            
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('nav-active');
+            });
+
+            // Close menu when a link is clicked
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('nav-active');
+                });
+            });
+        }
+
+        // --- Scroll Spy (Active Nav Link) ---
+        function initScrollSpy() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100; // Offset for sticky header
+                    if (window.scrollY >= sectionTop) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        }
+    </script>
+</body>
+</html>
