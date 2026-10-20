@@ -43,8 +43,8 @@
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             
             /* Fluid Typography */
-            --fs-hero: clamp(2.25rem, 6vw, 3.25rem);
-            --fs-h2: clamp(1.6rem, 4vw, 2.5rem);
+            --fs-hero: clamp(1.75rem, 5vw, 3.25rem);
+            --fs-h2: clamp(1.4rem, 4vw, 2.5rem);
             --fs-body: 1rem;
             --fs-small: 0.875rem;
         }
@@ -77,41 +77,53 @@
             font-size: var(--fs-body);
             transition: background-color 0.4s ease, color 0.4s ease;
             overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
         }
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
         button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+        img { max-width: 100%; height: auto; display: block; }
+
+        /* Focus States for Accessibility */
+        a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+            outline: 2px solid var(--indigo-primary);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
 
         /* Typography */
         h1, h2, h3, h4 { font-family: 'Manrope', system-ui, sans-serif; font-weight: 800; line-height: 1.2; color: var(--text-main); }
         .text-indigo { color: var(--indigo-primary); }
 
         /* Container */
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.25rem; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
 
         /* Navbar */
         .navbar {
             position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border-card);
             transition: background 0.4s ease, border-color 0.4s ease;
         }
         html.dark-mode .navbar { background: rgba(8, 11, 20, 0.85); }
         .nav-container { display: flex; align-items: center; justify-content: space-between; height: 64px; }
         
-        /* Premium Logo */
-        .nav-logo { display: flex; align-items: center; gap: 0.6rem; }
-        .logo-icon { 
-            width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; 
-            border-radius: 10px; box-shadow: 0 4px 12px rgba(67, 56, 202, 0.3); 
+        /* Image Logo */
+        .nav-logo { display: flex; align-items: center; gap: 0.5rem; }
+        .logo-img { 
+            height: 32px; 
+            width: auto;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(67, 56, 202, 0.2);
             transition: transform 0.3s ease;
+            flex-shrink: 0;
         }
-        .nav-logo:hover .logo-icon { transform: scale(1.05) rotate(-5deg); }
-        html.dark-mode .logo-icon { box-shadow: 0 4px 12px rgba(129, 140, 248, 0.3); }
+        .nav-logo:hover .logo-img { transform: scale(1.05); }
         .logo-text-wrap { display: flex; flex-direction: column; line-height: 1.1; }
-        .logo-text { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--text-main); }
-        .logo-sub { font-size: 0.7rem; color: var(--text-secondary); font-weight: 500; }
+        .logo-text { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--text-main); }
+        .logo-sub { font-size: 0.65rem; color: var(--text-secondary); font-weight: 500; }
         
         .nav-links { display: flex; gap: 0.25rem; align-items: center; }
         .nav-link {
@@ -121,9 +133,9 @@
         .nav-link:hover, .nav-link.active { color: var(--indigo-primary); background: var(--indigo-soft); }
         .nav-actions { display: flex; align-items: center; gap: 0.5rem; }
         .icon-btn {
-            width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center;
+            width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center;
             justify-content: center; color: var(--text-secondary); transition: var(--transition);
-            border: 1px solid var(--border-card);
+            border: 1px solid var(--border-card); flex-shrink: 0;
         }
         .icon-btn:hover { background: var(--indigo-soft); color: var(--indigo-primary); border-color: var(--indigo-primary); }
         #moonIcon { display: none; }
@@ -131,20 +143,20 @@
         html.dark-mode #moonIcon { display: block; }
         
         /* Hamburger */
-        .hamburger { display: none; flex-direction: column; gap: 4px; padding: 8px; }
+        .hamburger { display: none; flex-direction: column; gap: 4px; padding: 8px; width: 40px; height: 40px; align-items: center; justify-content: center; flex-shrink: 0; }
         .hamburger span { width: 22px; height: 2px; background: var(--text-main); transition: var(--transition); }
 
         /* Hero */
-        .hero { padding: 6rem 0 4rem; background: var(--bg-secondary); border-bottom: 1px solid var(--border-card); }
+        .hero { padding: 5rem 0 3rem; background: var(--bg-secondary); border-bottom: 1px solid var(--border-card); }
         .hero-container { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 3rem; align-items: center; }
         .badge {
             display: inline-flex; align-items: center; gap: 0.5rem; background: var(--bg-card);
-            border: 1px solid var(--border-card); color: var(--indigo-primary); font-size: 0.7rem;
+            border: 1px solid var(--border-card); color: var(--indigo-primary); font-size: 0.65rem;
             font-weight: 600; padding: 0.4rem 0.8rem; border-radius: 99px; box-shadow: var(--shadow-sm);
             text-transform: uppercase; letter-spacing: 0.05em;
         }
-        .hero-title { font-size: var(--fs-hero); margin: 1.25rem 0 1rem; animation: fadeUp 0.8s ease-out; }
-        .hero-desc { color: var(--text-secondary); font-size: 1rem; margin-bottom: 1.5rem; max-width: 500px; animation: fadeUp 1s ease-out; }
+        .hero-title { font-size: var(--fs-hero); margin: 1.25rem 0 1rem; animation: fadeUp 0.8s ease-out; word-wrap: break-word; overflow-wrap: break-word; }
+        .hero-desc { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem; max-width: 500px; animation: fadeUp 1s ease-out; }
         .hero-actions { display: flex; gap: 0.75rem; animation: fadeUp 1.2s ease-out; flex-wrap: wrap; }
         .hero-visual { animation: fadeIn 1.2s ease-out; }
 
@@ -155,7 +167,7 @@
         .btn {
             display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
             padding: 0.75rem 1.25rem; border-radius: 10px; font-weight: 600; font-size: 0.875rem;
-            transition: var(--transition); cursor: pointer; -webkit-tap-highlight-color: transparent;
+            transition: var(--transition); cursor: pointer; min-height: 44px;
         }
         .btn-primary { background: var(--indigo-primary); color: #fff; box-shadow: 0 4px 14px rgba(67, 56, 202, 0.25); }
         html.dark-mode .btn-primary { box-shadow: 0 4px 14px rgba(129, 140, 248, 0.25); }
@@ -168,32 +180,32 @@
         .deal-card { background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 16px; padding: 1.5rem; box-shadow: var(--shadow-lg); }
         .deal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-card); }
         .deal-title { font-size: 1rem; font-family: 'Manrope', sans-serif; }
-        .deal-badge { font-size: 0.65rem; background: var(--indigo-soft); color: var(--indigo-primary); padding: 0.25rem 0.5rem; border-radius: 6px; font-weight: 600; }
+        .deal-badge { font-size: 0.6rem; background: var(--indigo-soft); color: var(--indigo-primary); padding: 0.25rem 0.5rem; border-radius: 6px; font-weight: 600; }
         .deal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem; }
         .deal-item span { font-size: 0.75rem; color: var(--text-secondary); display: block; margin-bottom: 0.25rem; }
         .deal-item strong { font-size: 1.1rem; font-family: 'Manrope', sans-serif; font-weight: 700; }
         .deal-footer { font-size: 0.7rem; color: var(--text-secondary); text-align: center; margin-top: 1rem; border-top: 1px solid var(--border-card); padding-top: 1rem; }
 
         /* Sections */
-        .section { padding: 4rem 0; }
+        .section { padding: 3.5rem 0; }
         .section-muted { background: var(--bg-secondary); }
         .section-indigo { background: var(--indigo-soft); }
         .section-header { text-align: center; margin-bottom: 2.5rem; max-width: 700px; margin-left: auto; margin-right: auto; }
-        .section-label { display: block; font-size: 0.75rem; font-weight: 600; color: var(--indigo-primary); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+        .section-label { display: block; font-size: 0.7rem; font-weight: 600; color: var(--indigo-primary); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
         .section-title { font-size: var(--fs-h2); margin-bottom: 0.5rem; }
-        .section-subtitle { color: var(--text-secondary); font-size: 0.95rem; max-width: 600px; margin: 0 auto; }
+        .section-subtitle { color: var(--text-secondary); font-size: 0.9rem; max-width: 600px; margin: 0 auto; }
 
         /* Grids & Cards */
-        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; }
-        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
-        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 1.25rem; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 1.25rem; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 1.5rem; }
         .info-card { background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 12px; padding: 1.5rem; transition: var(--transition); height: 100%; }
         .info-card:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); border-color: var(--indigo-primary); }
         .card-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--indigo-soft); color: var(--indigo-primary); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
         .card-title { font-size: 1.05rem; margin-bottom: 0.5rem; }
         .card-text { color: var(--text-secondary); font-size: 0.85rem; }
 
-        /* How It Works (Two Column) */
+        /* How It Works */
         .how-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
         .how-left .section-label { text-align: left; margin-bottom: 0.75rem; }
         .how-left h2 { text-align: left; font-size: 2rem; margin-bottom: 1rem; }
@@ -218,7 +230,7 @@
         .buysell-list li { display: flex; gap: 0.75rem; margin-bottom: 1rem; color: var(--text-secondary); font-size: 0.85rem; align-items: flex-start; }
         .buysell-list li svg { flex-shrink: 0; margin-top: 2px; color: var(--indigo-primary); }
 
-        /* Platforms Area (Compliance) */
+        /* Platforms Area */
         .platforms-container { margin-top: 3rem; padding-top: 3rem; border-top: 1px solid var(--border-card); text-align: center; }
         .platforms-title { font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-main); }
         .platforms-statement { max-width: 700px; margin: 0 auto 2.5rem; font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
@@ -231,7 +243,7 @@
         .disclaimer-block { text-align: center; margin-top: 3rem; padding: 2rem; background: var(--bg-card); border-radius: 16px; border: 1px solid var(--border-card); }
         .disclaimer-block h3 { font-size: 1.5rem; margin-bottom: 1rem; }
         .disclaimer-block p { color: var(--text-secondary); font-size: 0.9rem; max-width: 700px; margin: 0 auto 2.5rem; }
-        .disclaimer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; text-align: left; }
+        .disclaimer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 1.25rem; text-align: left; }
         .disclaimer-card { padding: 1rem; background: var(--bg-secondary); border-radius: 8px; border-left: 3px solid var(--indigo-primary); }
         .disclaimer-card h4 { font-size: 0.9rem; margin-bottom: 0.25rem; }
         .disclaimer-card p { font-size: 0.8rem; text-align: left; max-width: 100%; margin: 0; }
@@ -239,7 +251,7 @@
         /* FAQ */
         .faq-container { max-width: 800px; margin: 0 auto; }
         .faq-item { background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 12px; margin-bottom: 1rem; overflow: hidden; transition: var(--transition); }
-        .faq-question { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem; cursor: pointer; font-weight: 600; font-family: 'Manrope', sans-serif; font-size: 0.95rem; -webkit-tap-highlight-color: transparent; }
+        .faq-question { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem; cursor: pointer; font-weight: 600; font-family: 'Manrope', sans-serif; font-size: 0.9rem; min-height: 44px; }
         .faq-toggle { transition: transform 0.3s; color: var(--text-secondary); flex-shrink: 0; }
         .faq-item.active .faq-toggle { transform: rotate(180deg); color: var(--indigo-primary); }
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out, padding 0.3s ease-out; padding: 0 1.25rem; color: var(--text-secondary); font-size: 0.85rem; }
@@ -249,7 +261,7 @@
         .cta-box { background: linear-gradient(135deg, var(--indigo-primary), var(--indigo-deep)); border-radius: 24px; padding: 3.5rem 2rem; text-align: center; color: #fff; box-shadow: var(--shadow-lg); }
         .cta-box .section-label { color: rgba(255,255,255,0.8); }
         .cta-box h2 { color: #fff; font-size: var(--fs-h2); margin-bottom: 1rem; }
-        .cta-box p { color: rgba(255, 255, 255, 0.9); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; font-size: 0.95rem; }
+        .cta-box p { color: rgba(255, 255, 255, 0.9); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; font-size: 0.9rem; }
         .cta-box .btn { background: #fff; color: var(--indigo-deep); }
         .cta-box .btn:hover { background: #F8FAFC; transform: translateY(-2px); }
 
@@ -264,44 +276,85 @@
         .footer-disclaimer { background: var(--bg-main); border: 1px solid var(--border-card); padding: 1.5rem; border-radius: 12px; font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 2rem; text-align: center; line-height: 1.6; }
         .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid var(--border-card); font-size: 0.8rem; color: var(--text-secondary); }
 
-        /* Responsive Design */
+        /* =================================
+           RESPONSIVE DESIGN
+           ================================= */
         @media (max-width: 1024px) {
-            .hero-container { grid-template-columns: 1fr; gap: 2rem; }
+            .hero-container { grid-template-columns: 1fr; gap: 2.5rem; text-align: center; }
+            .hero-content { display: flex; flex-direction: column; align-items: center; }
             .hero-visual { max-width: 450px; margin: 0 auto; width: 100%; }
-            .how-grid { grid-template-columns: 1fr; gap: 2rem; }
-            .how-left h2, .how-left p, .how-left .section-label { text-align: center; }
+            .how-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .how-left .section-label, .how-left h2, .how-left p { text-align: center; }
+            .how-left .checklist { max-width: 500px; margin: 0 auto; }
         }
         
         @media (max-width: 768px) {
             .nav-links {
-                position: fixed; top: 64px; right: -100%; width: 100%; height: calc(100vh - 64px);
+                position: fixed; top: 64px; right: -100%; width: 80%; max-width: 320px; height: calc(100vh - 64px);
                 background: var(--bg-card); flex-direction: column; padding: 1.5rem;
                 gap: 0; transition: right 0.3s ease-in-out; align-items: stretch;
+                box-shadow: -5px 0 30px rgba(0,0,0,0.1);
                 overflow-y: auto;
             }
-            .nav-links.nav-active { right: 0; box-shadow: var(--shadow-lg); }
+            html.dark-mode .nav-links { box-shadow: -5px 0 30px rgba(0,0,0,0.5); }
+            .nav-links.nav-active { right: 0; }
             .nav-link { padding: 1rem 0.5rem; border-bottom: 1px solid var(--border-card); width: 100%; font-size: 1rem; }
             .hamburger { display: flex; }
             .nav-cta { display: none; } 
             .nav-links .nav-cta { display: flex; margin-top: 1rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+            .footer-desc { margin-left: auto; margin-right: auto; }
+            .footer-col ul { align-items: center; }
+            
+            /* Keep Digital Asset Desk visible on mobile */
+            .logo-text { font-size: 0.85rem; }
+            .logo-sub { font-size: 0.6rem; }
         }
 
         @media (max-width: 480px) {
-            .container { padding: 0 1rem; }
-            .hero { padding: 5rem 0 3rem; }
-            .hero-actions .btn { width: 100%; }
+            .container { padding: 0 0.75rem; }
+            .hero { padding: 4rem 0 2rem; }
+            .hero-title { font-size: clamp(1.5rem, 7vw, 2rem); }
+            .hero-desc { font-size: 0.85rem; }
+            .hero-actions { flex-direction: column; width: 100%; }
+            .hero-actions .btn { width: 100%; font-size: 0.8rem; padding: 0.65rem 1rem; }
             .deal-card { padding: 1.25rem; }
             .deal-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
-            .deal-item strong { font-size: 1rem; }
-            .section { padding: 3rem 0; }
-            .section-title { font-size: 1.5rem; }
+            .deal-item strong { font-size: 0.95rem; }
+            .deal-item span { font-size: 0.65rem; }
+            .section { padding: 2.5rem 0; }
+            .section-title { font-size: 1.35rem; }
+            .section-subtitle { font-size: 0.85rem; }
             .buysell-card { padding: 1.5rem; }
-            .cta-box { padding: 2.5rem 1.5rem; }
-            .cta-box .btn { width: 100%; }
-            .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
-            .logo-sub { display: none; } 
-            .logo-text { font-size: 0.9rem; }
-            .platform-card { width: 100%; }
+            .buysell-header { gap: 0.75rem; }
+            .buysell-icon { width: 36px; height: 36px; }
+            .buysell-icon svg { width: 18px; height: 18px; }
+            .buysell-list li { font-size: 0.8rem; gap: 0.5rem; }
+            .steps-panel { padding: 1.5rem; }
+            .step-item { gap: 0.75rem; }
+            .step-content h4 { font-size: 0.9rem; }
+            .step-content p { font-size: 0.8rem; }
+            .cta-box { padding: 2rem 1.25rem; }
+            .cta-box .btn { width: 100%; font-size: 0.8rem; }
+            .logo-img { height: 28px; }
+            .logo-text { font-size: 0.8rem; }
+            .logo-sub { font-size: 0.55rem; }
+            .platform-card { width: 100%; padding: 0.75rem; font-size: 0.95rem; }
+            .nav-actions { gap: 0.25rem; }
+            .icon-btn { width: 36px; height: 36px; }
+            .info-card { padding: 1.25rem; }
+            .card-title { font-size: 0.95rem; }
+            .card-text { font-size: 0.8rem; }
+        }
+
+        @media (max-width: 360px) {
+            .hero-title { font-size: 1.35rem; }
+            .badge { font-size: 0.55rem; padding: 0.3rem 0.6rem; }
+            .deal-grid { grid-template-columns: 1fr; gap: 0.75rem; }
+            .nav-logo { gap: 0.35rem; }
+            .logo-img { height: 26px; }
+            .logo-text { font-size: 0.75rem; }
+            .logo-sub { font-size: 0.5rem; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -315,19 +368,7 @@
     <header class="navbar">
         <div class="container nav-container">
             <a href="#home" class="nav-logo">
-                <div class="logo-icon">
-                    <svg width="20" height="20" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="40" height="40" rx="12" fill="url(#paint0_linear)"/>
-                        <path d="M12 28V12L20 20M20 20L28 12V28" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                        <circle cx="20" cy="20" r="2" fill="white"/>
-                        <defs>
-                            <linearGradient id="paint0_linear" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-                                <stop stop-color="#4338CA"/>
-                                <stop offset="1" stop-color="#312E81"/>
-                            </linearGradient>
-                        </defs>
-                    </svg>
-                </div>
+                <img src="assets/logo.png" alt="Mayank Singh Logo" class="logo-img" onerror="this.style.display='none'">
                 <div class="logo-text-wrap">
                     <span class="logo-text">Mayank Singh</span>
                     <span class="logo-sub">Digital Asset Desk</span>
@@ -340,8 +381,7 @@
                 <a href="#why" class="nav-link">Why Us</a>
                 <a href="#compliance" class="nav-link">Compliance</a>
                 <a href="#faq" class="nav-link">FAQ</a>
-                <!-- Placeholder WhatsApp Number: Replace 919999999999 with actual number -->
-                <a href="https://wa.me/919999999999" target="_blank" rel="noopener" class="btn btn-primary nav-cta">
+                <a href="https://wa.me/qr/34C7JCQUACQOG1" target="_blank" rel="noopener" class="btn btn-primary nav-cta">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.004 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
                     WhatsApp Now
                 </a>
@@ -365,11 +405,11 @@
             <div class="container hero-container">
                 <div class="hero-content">
                     <span class="badge">INR ↔ USDT P2P DESK</span>
-                    <h1 class="hero-title">Buy & Sell USDT with a Professional P2P Process.</h1>
+                    <h1 class="hero-title">Buy &amp; Sell USDT with a Professional P2P Process.</h1>
                     <p class="hero-desc">Transparent quotes, verification-based dealing, clear payment flows, and proper transaction records for users seeking a more structured INR–USDT experience.</p>
                     
                     <div class="hero-actions">
-                        <a href="https://wa.me/919999999999" target="_blank" rel="noopener" class="btn btn-primary">
+                        <a href="https://wa.me/qr/34C7JCQUACQOG1" target="_blank" rel="noopener" class="btn btn-primary">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.004 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
                             WhatsApp Now
                         </a>
@@ -478,7 +518,7 @@
                         <div class="step-item">
                             <div class="step-number">2</div>
                             <div class="step-content">
-                                <h4>Verify & Confirm</h4>
+                                <h4>Verify &amp; Confirm</h4>
                                 <p>Complete the required verification and confirm deal size, payment method, and transaction terms.</p>
                             </div>
                         </div>
@@ -509,7 +549,6 @@
                     <h2 class="section-title">Buy USDT. Sell USDT. Keep It Professional.</h2>
                 </div>
                 <div class="grid-2">
-                    <!-- Buy Card -->
                     <div class="buysell-card">
                         <div class="buysell-header">
                             <div class="buysell-icon">
@@ -525,10 +564,9 @@
                             <li><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Suitable for verified users and repeat buyers</li>
                             <li><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> No investment recommendation or trading promise</li>
                         </ul>
-                        <a href="https://wa.me/919999999999?text=I%20want%20to%20BUY%20USDT" target="_blank" rel="noopener" class="btn btn-primary" style="width: 100%;">Buy USDT</a>
+                        <a href="https://wa.me/qr/34C7JCQUACQOG1" target="_blank" rel="noopener" class="btn btn-primary" style="width: 100%;">Buy USDT</a>
                     </div>
 
-                    <!-- Sell Card -->
                     <div class="buysell-card">
                         <div class="buysell-header">
                             <div class="buysell-icon">
@@ -544,7 +582,7 @@
                             <li><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Transaction records for reconciliation</li>
                             <li><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Verification and fraud-awareness procedures</li>
                         </ul>
-                        <a href="https://wa.me/919999999999?text=I%20want%20to%20SELL%20USDT" target="_blank" rel="noopener" class="btn btn-outline" style="width: 100%;">Sell USDT</a>
+                        <a href="https://wa.me/qr/34C7JCQUACQOG1" target="_blank" rel="noopener" class="btn btn-outline" style="width: 100%;">Sell USDT</a>
                     </div>
                 </div>
             </div>
@@ -554,7 +592,7 @@
         <section id="compliance" class="section section-indigo">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-label">COMPLIANCE & RESPONSIBLE DEALING</span>
+                    <span class="section-label">COMPLIANCE &amp; RESPONSIBLE DEALING</span>
                     <h2 class="section-title">Responsible Digital Asset Dealing. Compliance Comes First.</h2>
                     <p class="section-subtitle">We prioritize transparent dealing, appropriate verification, transaction record-keeping, and compliance with applicable Indian laws and taxation requirements.</p>
                 </div>
@@ -583,12 +621,11 @@
                         <div class="card-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
                         </div>
-                        <h3 class="card-title">Verification & Responsible Records</h3>
+                        <h3 class="card-title">Verification &amp; Responsible Records</h3>
                         <p class="card-text">Appropriate verification, transaction documentation, and payment confirmations support responsible dealing, subject to applicable legal requirements and privacy safeguards.</p>
                     </div>
                 </div>
 
-                <!-- Compliance Disclaimer Block -->
                 <div class="disclaimer-block">
                     <h3>Responsible Dealing Is Non-Negotiable.</h3>
                     <p>USDT and similar crypto assets are virtual digital assets and are not legal tender in India. Users should understand applicable tax, TDS, KYC, AML, and record-keeping obligations before transacting. This website does not claim to be an exchange, bank, payment institution, investment adviser, or government-approved platform.</p>
@@ -683,7 +720,7 @@
                     <span class="section-label">START RESPONSIBLY</span>
                     <h2>Want Today's USDT Rate?</h2>
                     <p>Send your requirement on WhatsApp: buy or sell, quantity, preferred payment method, and city. You can then discuss the current indicative quote and transaction process.</p>
-                    <a href="https://wa.me/919999999999" target="_blank" rel="noopener" class="btn">
+                    <a href="https://wa.me/qr/34C7JCQUACQOG1" target="_blank" rel="noopener" class="btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.004 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
                         WhatsApp Mayank
                     </a>
@@ -698,19 +735,7 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <div class="nav-logo">
-                        <div class="logo-icon">
-                            <svg width="20" height="20" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect width="40" height="40" rx="12" fill="url(#paint1_linear)"/>
-                                <path d="M12 28V12L20 20M20 20L28 12V28" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                                <circle cx="20" cy="20" r="2" fill="white"/>
-                                <defs>
-                                    <linearGradient id="paint1_linear" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-                                        <stop stop-color="#4338CA"/>
-                                        <stop offset="1" stop-color="#312E81"/>
-                                    </linearGradient>
-                                </defs>
-                            </svg>
-                        </div>
+                        <img src="assets/logo.png" alt="Mayank Singh Logo" class="logo-img" onerror="this.style.display='none'">
                         <div class="logo-text-wrap">
                             <span class="logo-text">Mayank Singh</span>
                             <span class="logo-sub">Digital Asset Desk</span>
@@ -748,32 +773,18 @@
 
     <!-- JavaScript -->
     <script>
-        // =================================
-        // MAYANK SINGH DIGITAL ASSET DESK - SCRIPT
-        // =================================
-
         document.addEventListener('DOMContentLoaded', () => {
-            // Set dynamic year in footer
             document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-            // Theme Toggle Setup
             initThemeToggle();
-            
-            // Mobile Menu
             initMobileMenu();
-            
-            // Active Nav Link on Scroll
             initScrollSpy();
         });
 
-        // --- Theme Toggle ---
         function initThemeToggle() {
             const themeToggle = document.getElementById('themeToggle');
             const sunIcon = document.getElementById('sunIcon');
             const moonIcon = document.getElementById('moonIcon');
-
             updateThemeIcons();
-
             themeToggle.addEventListener('click', () => {
                 document.documentElement.classList.toggle('dark-mode');
                 if (document.documentElement.classList.contains('dark-mode')) {
@@ -783,7 +794,6 @@
                 }
                 updateThemeIcons();
             });
-
             function updateThemeIcons() {
                 const isDark = document.documentElement.classList.contains('dark-mode');
                 sunIcon.style.display = isDark ? 'block' : 'none';
@@ -792,59 +802,40 @@
             }
         }
 
-        // --- Mobile Menu ---
         function initMobileMenu() {
             const hamburger = document.getElementById('hamburger');
             const navLinks = document.getElementById('navLinks');
-            
-            hamburger.addEventListener('click', () => {
-                navLinks.classList.toggle('nav-active');
-            });
-
+            hamburger.addEventListener('click', () => { navLinks.classList.toggle('nav-active'); });
             document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', () => {
-                    navLinks.classList.remove('nav-active');
-                });
+                link.addEventListener('click', () => { navLinks.classList.remove('nav-active'); });
             });
         }
 
-        // --- Scroll Spy (Active Nav Link) ---
         function initScrollSpy() {
             const sections = document.querySelectorAll('section');
             const navLinks = document.querySelectorAll('.nav-link');
-
             window.addEventListener('scroll', () => {
                 let current = '';
                 sections.forEach(section => {
                     const sectionTop = section.offsetTop - 80;
-                    if (window.scrollY >= sectionTop) {
-                        current = section.getAttribute('id');
-                    }
+                    if (window.scrollY >= sectionTop) { current = section.getAttribute('id'); }
                 });
-
                 navLinks.forEach(link => {
                     link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${current}`) {
-                        link.classList.add('active');
-                    }
+                    if (link.getAttribute('href') === `#${current}`) { link.classList.add('active'); }
                 });
             });
         }
 
-        // --- FAQ Accordion ---
         function toggleFaq(element) {
             const faqItem = element.parentElement;
             const answer = faqItem.querySelector('.faq-answer');
-            
-            // Close all other items
             document.querySelectorAll('.faq-item').forEach(item => {
                 if (item !== faqItem) {
                     item.classList.remove('active');
                     item.querySelector('.faq-answer').style.maxHeight = null;
                 }
             });
-
-            // Toggle current item
             faqItem.classList.toggle('active');
             if (faqItem.classList.contains('active')) {
                 answer.style.maxHeight = answer.scrollHeight + 'px';
